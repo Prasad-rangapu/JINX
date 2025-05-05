@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up | JINX</title>
+  <link rel="icon" type="image/x-icon" href="assets/logo.png">
+  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+  <header class="header-main">
+    <div class="logo-container">
+      <img width="70" height="70" src="assets/logo.png" alt="JINX" class="header-logo">
+    </div>
+    <nav class="main-nav">
+      <div class="nav-wrapper">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="login.html">Login</a>
+        <a class="nav-link active" href="sign_up.html">Sign Up</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="auth-container">
+    <div class="card">
+      <h1 class="gradient-text">Join JINX</h1>
+      <form class="auth-form" id="signupForm">
+        <div class="grid-2">
+          <div class="input-group">
+            <input type="text" id="fname" required>
+            <label for="fname">First Name</label>
+          </div>
+          <div class="input-group">
+            <input type="text" id="lname" required>
+            <label for="lname">Last Name</label>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="username" required>
+          <label for="username">Username</label>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="email" required>
+          <label for="email">Email</label>
+        </div>
+
+        <div class="input-group">
+          <input type="tel" id="pnumber" pattern="[0-9]{10}" required>
+          <label for="pnumber">Mobile Number</label>
+        </div>
+
+        <div class="grid-2">
+          <div class="input-group">
+            <input type="password" id="password1" required>
+            <label for="password1">Password</label>
+          </div>
+          <div class="input-group">
+            <input type="password" id="password2" required>
+            <label for="password2">Confirm Password</label>
+          </div>
+        </div>
+
+        <button type="submit" class="primary-btn">Create Account →</button>
+      </form>
+      <p class="auth-alt">Already have an account? <a href="login.html" class="accent-link">Sign In</a></p>
+    </div>
+  </main>
+<footer class="glass-footer">
+    <h4>JINX</h4>
+    <div class="contact">
+      <span>Contact Info:</span>
+      <hr>
+      <img src="assets/envelope-fill.svg" alt="Email">
+      <a href="mailto:midnightmettle1191610@gmail.com?subject=feedback">midnightmettle1191610@gmail.com</a>
+      <br>
+      <img src="assets/telephone.svg" alt="Phone">
+      <a href="tel:+918885248125">+91 88852 48125</a>
+    </div>
+
+    <div class="follow">
+      <span>Follow Us:</span>
+      <hr>
+      <img src="assets/instagram.svg" alt="Instagram">
+      <a href="https://www.instagram.com/prasad_rangapu_06">Instagram</a>
+      <br>
+      <img src="assets/facebook.svg" alt="Facebook">
+      <a href="https://www.facebook.com/your-facebook-page-url">Facebook</a>
+      <br>
+      <img src="assets/twitter-x.svg" alt="Twitter">
+      <a href="https://twitter.com/prasad_rangapu">X (formerly Twitter)</a>
+    </div>
+
+    <div class="copyright">
+      &copy; 2025 JINX Pvt Ltd. All rights reserved | 
+      <a href="#" class="accent-link">Privacy Policy</a>
+    </div>
+  </footer>
+  <script src="../javascripts/forms.js"></script>
+</body>
+</html>
