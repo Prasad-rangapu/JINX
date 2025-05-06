@@ -25,7 +25,7 @@ document.getElementById('signupForm')?.addEventListener('submit', async (e) => {
     });
     
     const data = await response.json();
-    if (data.success) window.location.href = `/html/home.html`;
+    if (data.success) window.location.href = `home.html`;
     else alert('Signup failed: ' + (data.error || 'Unknown error'));
 
   } catch (error) {
@@ -51,7 +51,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     });
     
     const data = await response.json();
-    if (data.success) window.location.href = `/html/home.html`;
+    if (data.success) window.location.href = `home.html`;
     else alert('Login failed: ' + (data.error || 'Invalid credentials'));
 
   } catch (error) {
@@ -59,3 +59,21 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     alert('Connection failed');
   }
 });
+
+async function checklogin(){
+  try{
+  var email=document.getElementById('checkmail').value;
+  const response =await fetch('/emailcheck',{
+    method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(email)
+  });
+  
+  const data = await response.json();
+    if (data.success) window.location.href = `login.html`;
+    else window.location.href=`sign_up.html`;
+}
+  catch(error){
+    console.log(error);
+  }
+}
