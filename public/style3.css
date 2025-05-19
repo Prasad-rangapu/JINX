@@ -1,0 +1,245 @@
+:root {
+  --primary: #2563eb;
+  --secondary: #7c3aed;
+  --accent: #f59e0b;
+  --dark: #1e293b;
+  --light: #f8fafc;
+  --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+  --glass: rgba(255, 255, 255, 0.12);
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* Header Styles */
+.header-main {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--light);
+  box-shadow: var(--shadow);
+}
+
+/* Logo Section */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  min-height: 100px;
+  font-size: xx-large;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+/* Navigation */
+.main-nav {
+  background: #000;
+  padding: 1rem 2rem;
+}
+
+.nav-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: 25px;
+  transition: all 0.35s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Search Bar */
+.search-conainer {
+  display: flex;
+  align-items: center;
+  background-color: var(--light);
+  box-shadow: var(--shadow);
+  margin: 1rem auto;
+  padding: 0.5rem;
+  width: fit-content;
+  border-radius: 8px;
+}
+
+#blog-search {
+  height: 35px;
+  border: solid 2px var(--dark);
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 6px 0 0 6px;
+  padding: 0 0.5rem;
+}
+
+#search-btn {
+  border: none;
+  background-color: var(--primary);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+}
+
+/* Input Group */
+.input-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+/* Floating Labels (optional) */
+.input-group label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  color: #9ca3af;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label,
+.input-group textarea:focus ~ label,
+.input-group textarea:valid ~ label {
+  top: -0.6rem;
+  left: 0.75rem;
+  font-size: 0.75rem;
+  background: var(--light);
+  padding: 0 0.3rem;
+  color: var(--primary);
+}
+
+/* Posts Layout */
+.posts-container,
+.user-posts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.post {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+.post h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.post p {
+  color: #4b5563;
+}
+
+/* Create Post */
+.new-post {
+  padding: 2rem;
+  text-align: center;
+}
+
+#toggle-btn {
+  background: var(--accent);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Profile Page */
+main {
+  padding: 2rem;
+}
+
+.profile-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-cards img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+}
+
+#upload-label {
+  background: var(--dark);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  position: relative;
+  top: -40px;
+  left: -50px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.user-details {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+#logout-btn {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+#logout-btn:hover {
+  background-color: #b91c1c;
+}

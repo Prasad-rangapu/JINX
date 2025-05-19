@@ -3,10 +3,10 @@ const mariadb = require('mariadb');
 const pool = mariadb.createPool({
   host: 'localhost',
   user: 'root',
-  password: '1234',
-  database: 'blog',
+  password: '2560',
+  database: 'jinx',
   connectionLimit: 5,
-  allowPublicKeyRetrieval: true // Required for newer MariaDB versions
+  allowPublicKeyRetrieval: true
 });
 
 // Verify connection

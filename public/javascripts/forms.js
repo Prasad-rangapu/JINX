@@ -18,19 +18,28 @@ document.getElementById('signupForm')?.addEventListener('submit', async (e) => {
   }
 
   try {
-    const response = await fetch('/api/auth/signup', {
+  
+    const response = await fetch('http://localhost:3000/api/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
-    
+
     const data = await response.json();
-    if (data.success) window.location.href = `home.html`;
-    else alert('Signup failed: ' + (data.error || 'Unknown error'));
+    console.log('Response status:', response.status);
+    console.log('Response data:', data);
+
+    if (data.success) {
+      localStorage.setItem('currentUser',JSON.stringify(data.user));
+      window.location.href = `/JINX/public/home.html`;
+    } else {
+      alert('Signup failed: ' + (data.error || 'Unknown error'));
+    }
 
   } catch (error) {
-    console.error('Signup error:', error);
+    // console.error('Signup error:', error);
     alert('Connection failed');
+    console.log('try not worked');
   }
 });
 
@@ -44,36 +53,27 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
   };
 
   try {
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include', // <-- Add this if you use sessions/cookies
       body: JSON.stringify(formData)
     });
-    
+
     const data = await response.json();
-    if (data.success) window.location.href = `home.html`;
-    else alert('Login failed: ' + (data.error || 'Invalid credentials'));
+    console.log('Response status:', response.status);
+    console.log('Response data:', data);
+
+    if (data.success) {
+            localStorage.setItem('currentUser',JSON.stringify(data.user));
+
+      window.location.href = `/JINX/public/home.html`;
+    } else {
+      alert('Login failed: ' + (data.error || 'Invalid credentials'));
+    }
 
   } catch (error) {
     console.error('Login error:', error);
     alert('Connection failed');
   }
 });
-
-async function checklogin(){
-  try{
-  var email=document.getElementById('checkmail').value;
-  const response =await fetch('/emailcheck',{
-    method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(email)
-  });
-  
-  const data = await response.json();
-    if (data.success) window.location.href = `login.html`;
-    else window.location.href=`sign_up.html`;
-}
-  catch(error){
-    console.log(error);
-  }
-}
