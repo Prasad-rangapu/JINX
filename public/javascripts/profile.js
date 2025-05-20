@@ -1,8 +1,8 @@
 function loadUserDetails(){
     try{
           const currentUser=JSON.parse(localStorage.getItem('currentUser'));
-document.getElementById('user-details').innerHTML=`<p>${currentUser.username}</p> <br/> <p>${currentUser.fname} ${currentUser.lname}</p> <br/> 
-Email:<br/>${currentUser.email} <br/> Phone Number : ${currentUser.pnumber} `;
+document.getElementById('user-details').innerHTML=`<p>${currentUser.username}</p> <br/> <p>${currentUser.firstname} ${currentUser.lastname}</p> <br/> 
+Email:<br/>${currentUser.email} <br/> Phone Number : ${currentUser.phone} `;
 
 
     }

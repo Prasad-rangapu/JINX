@@ -94,41 +94,7 @@ if (newUser===undefined) {
   }
 });
 
-// Login route
-// router.post('/login', authLimiter, async (req, res) => {
-//   const { email, password } = req.body;
 
-//   try {
-//     if (!email || !password) {
-//       return res.status(400).json({ error: 'Email and password required' });
-//     }
-
-//     const [rows] =  pool.query('SELECT * FROM users WHERE email = ?', [email]);
-
-//     if (rows.length === 0||!rows[0]) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
-//     users=rows[0];
-//     console.log(users);
-
-//     const isValid = await bcrypt.compare(password, users.password);
-//     if (!isValid) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
-
-//     const { password: _, ...userData } = users[0];
-
-//     req.login(userData, (err) => {
-//       if (err) return res.status(500).json({ error: 'Session error' });
-//       res.json({ success: true, user: userData });
-//     });
-
-//   } catch (error) {
-//     console.error('Login error:', error);
-//     res.status(500).json({ error: 'Login failed' });
-//     console.log('try not worked in login');
-//   }
-// });
 router.post('/login', authLimiter, async (req, res) => {
   const { email, password } = req.body;
 

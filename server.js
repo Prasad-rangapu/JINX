@@ -8,7 +8,7 @@ const createError = require('http-errors');
 const postRoutes=require('./routes/posts.routes');
 const authRoutes = require('./routes/auth');
 const contactRoutes = require('./routes/contact');
-const profileRoutes = require('./routes/profile.routes');
+// const profileRoutes = require('./routes/profile.routes');
 
 const app = express();
 
@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
-app.use('/api/profile', profileRoutes);
+// app.use('/api/profile', profileRoutes);
 app.use('/api/posts', postRoutes);
 
 
