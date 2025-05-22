@@ -77,3 +77,46 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     alert('Connection failed');
   }
 });
+
+
+
+//added contact form handler
+document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const formData = {
+    cname:document.getElementById('cname').value,
+   cemail: document.getElementById('cemail').value,
+    subject: document.getElementById('subject').value,
+    message: document.getElementById('message').value
+  };
+  if (formData.cname === '' || formData.cemail === '' || formData.subject === '' || formData.message === '') {
+    alert('Please fill in all fields!');
+ 
+    return;
+  }
+
+  try {
+  
+    const response = await fetch('http://localhost:3000/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await response.json();
+    console.log('Response status:', response.status);
+    console.log('Response data:', data);
+    if (data.success) {
+      alert('Message sent successfully!');
+      window.location.href = `/JINX/public/index.html`;
+    } else {
+      alert('Message failed: ' + (data.error || 'Unknown error'));
+    }
+
+ 
+  } catch (error) {
+    console.error('Contact error:', error);
+    alert('Connection failed');
+  }
+});

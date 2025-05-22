@@ -51,4 +51,45 @@ router.post('/', async (req, res) => {
   res.status(201).json({ message: 'Post created' });
 });
 
+// Update post
+router.post(`/:postId/like`, async (req, res) => {
+  const postId = req.params.postId;
+  const { userId } = req.body;
+
+  const rows = await db.execute(
+    'select * from likes where post_id=? and user_id=?',
+    [postId, userId]
+  );
+  if (!rows.length) {
+    await db.execute(
+      'INSERT INTO likes (post_id, user_id) VALUES (?, ?)',
+      [postId, userId]
+    );
+    await db.execute(
+      'UPDATE posts SET likes = likes + 1 WHERE id = ?',
+      [postId]
+    );
+    const post= await db.execute(
+      'select * from posts where id=?',
+      [postId]);
+    res.status(201).json(post[0]);
+   
+  }
+  else{
+    await db.execute(
+      'delete from likes where post_id=? and user_id=?',
+      [postId, userId]
+    );
+    await db.execute(
+      'UPDATE posts SET likes = likes - 1 WHERE id = ?',
+      [postId]
+    );
+   const post= await db.execute(
+      'select * from posts where id=?',
+      [postId]);
+    res.status(201).json(post[0]);
+  } 
+});
+
+
 module.exports = router;
