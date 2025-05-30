@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blogs</title>
+  <link rel="stylesheet" href="style3.css" />
+  <script>
+    window.onload = () => loadRandomPosts();
+  </script>
+</head>
+<body>
+  <header class="header-main">
+    <div class="logo-container">
+      <h1 class="logo">JINX</h1>
+    </div>
+    <nav class="main-nav">
+      <div class="nav-wrapper">
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="blogs.html" class="nav-link active">Blogs</a>
+        <a href="create.html" class="nav-link">My Posts</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="search-container">
+    <input type="search" id="blog-search" placeholder="Search blog posts..." />
+    <button id="search-btn" onclick="searchPosts()">
+      <img src="./assets/search.svg" alt="Search" />
+    </button>
+  </section>
+
+  <main class="posts-container" id="blog-results"></main>
+
+  <script src="javascripts/posts.js"></script>
+</body>
+</html>

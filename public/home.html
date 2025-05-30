@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home</title>
+  <link rel="stylesheet" href="style3.css" />
+  <script>
+    window.onload = () => loadRecentPosts();
+  </script>
+</head>
+<body>
+  <header class="header-main">
+    <div class="logo-container">
+      <h1 class="logo">JINX</h1>
+    </div>
+    <nav class="main-nav">
+      <div class="nav-wrapper">
+        <a href="home.html" class="nav-link active">Home</a>
+        <a href="blogs.html" class="nav-link">Blogs</a>
+        <a href="create.html" class="nav-link">My Posts</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="wish">
+    <h1 id="welcome-user"></h1>
+  </section>
+
+  <main class="posts-container" id="recent-posts"></main>
+
+  <script src="javascripts/posts.js"></script>
+</body>
+</html>

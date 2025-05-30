@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Post</title>
+  <link rel="stylesheet" href="style3.css" />
+  <script>
+    window.onload = () => loadUserPosts();
+  </script>
+</head>
+<body>
+  <header class="header-main">
+    <div class="logo-container">
+      <h1 class="logo">JINX</h1>
+    </div>
+    <nav class="main-nav">
+      <div class="nav-wrapper">
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="blogs.html" class="nav-link">Blogs</a>
+        <a href="create.html" class="nav-link active">My Posts</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="new-post">
+      <button id="toggle-btn" onclick="showForm()">New Post</button>
+      <form class="post-form" style="display:none;" onsubmit="submitPost(event)">
+        <div class="input-group">
+          <input type="text" id="post-title" placeholder="Add Title" required />
+        </div>
+        <div class="input-group">
+          <textarea id="post-desc" cols="30" rows="10" placeholder="Description" required></textarea>
+        </div>
+        <div class="input-group">
+          <button type="submit">Publish</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="posts-container" id="user-posts"></section>
+  </main>
+
+  <script src="javascripts/posts.js"></script>
+</body>
+</html>
