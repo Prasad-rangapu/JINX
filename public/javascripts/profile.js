@@ -10,7 +10,11 @@ catch(error)
 {
     document.getElementById('user-details').innerHTML=`<p>unable to load the profile please load </p>`;
     alert('unable to load profile \n please re-login' )
+<<<<<<< HEAD
     window.location.href='/Blog/public/login.html';
+=======
+    window.location.href='/JINX/public/login.html';
+>>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
     console.error('unable to load profile:',error)
 }
 }

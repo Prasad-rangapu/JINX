@@ -30,9 +30,14 @@ document.getElementById('signupForm')?.addEventListener('submit', async (e) => {
     console.log('Response data:', data);
 
     if (data.success) {
+<<<<<<< HEAD
       localStorage.setItem('currentUser', JSON.stringify(data.user));
       localStorage.setItem('token', data.token); // <-- Store JWT
       window.location.href = `/public/home.html`;
+=======
+      localStorage.setItem('currentUser',JSON.stringify(data.user));
+      window.location.href = `/JINX/public/home.html`;
+>>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
     } else {
       alert('Signup failed: ' + (data.error || 'Unknown error'));
     }
@@ -66,9 +71,15 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     console.log('Response data:', data);
 
     if (data.success) {
+<<<<<<< HEAD
       localStorage.setItem('currentUser', JSON.stringify(data.user));
       localStorage.setItem('token', data.token); // <-- Store JWT
       window.location.href = `/public/home.html`;
+=======
+            localStorage.setItem('currentUser',JSON.stringify(data.user));
+
+      window.location.href = `/JINX/public/home.html`;
+>>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
     } else {
       alert('Login failed: ' + (data.error || 'Invalid credentials'));
     }
@@ -110,7 +121,11 @@ document.getElementById('contactForm')?.addEventListener('submit', async (e) => 
     console.log('Response data:', data);
     if (data.success) {
       alert('Message sent successfully!');
+<<<<<<< HEAD
       window.location.href = `/Blog/public/index.html`;
+=======
+      window.location.href = `/JINX/public/index.html`;
+>>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
     } else {
       alert('Message failed: ' + (data.error || 'Unknown error'));
     }

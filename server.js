@@ -6,7 +6,11 @@ const cors = require('cors');
 const session = require('express-session');
 const createError = require('http-errors');
 const postRoutes=require('./routes/posts.routes');
+<<<<<<< HEAD
 const auth = require('./routes/auth');
+=======
+const authRoutes = require('./routes/auth');
+>>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
 const contactRoutes = require('./routes/contact');
 // const profileRoutes = require('./routes/profile.routes');
 
@@ -41,7 +45,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // API routes
+<<<<<<< HEAD
 app.use('/api/auth', auth.router);
+=======
+app.use('/api/auth', authRoutes);
+>>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
 app.use('/api/contact', contactRoutes);
 // app.use('/api/profile', profileRoutes);
 app.use('/api/posts', postRoutes);
@@ -54,10 +62,18 @@ app.use((req, res, next) => next(createError(404)));
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message });
 });
+<<<<<<< HEAD
 const PORT = process.env.PORT || 3000;
+=======
+const PORT = 3000;
+>>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
 
+<<<<<<< HEAD
 module.exports = app;
+=======
+module.exports = app;
+>>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
