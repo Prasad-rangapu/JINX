@@ -10,7 +10,6 @@ async function addLike(postId)
  try{
 
 userId=currentUser.id;
-<<<<<<< HEAD
 const token = localStorage.getItem('token');
 
  const response = await fetch(`http://localhost:3000/api/posts/${postId}/like`, {
@@ -20,12 +19,6 @@ const token = localStorage.getItem('token');
       'Authorization': `Bearer ${token}` // <-- Send JWT
     },
     body: JSON.stringify({ postId, userId })
-=======
- const response = await fetch(`http://localhost:3000/api/posts/${postId}/like`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body:JSON.stringify({postId,userId})
->>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
     
   });
 

@@ -10,11 +10,7 @@ router.post('/', async (req, res) => {
   }
 
   try {
-<<<<<<< HEAD
     const [result] = await pool.query(
-=======
-    const result = await pool.query(
->>>>>>> 4385678e9a673fe7864d096d661695029b280bbc
       `INSERT INTO messages (name, email, subject, message)
        VALUES (?, ?, ?, ?)`,
       [cname, cemail, subject, message]
