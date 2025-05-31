@@ -135,22 +135,36 @@ router.get('/logout', (req, res) => {
 
 // JWT authentication middleware
 function authenticateJWT(req, res, next) {
-  const authHeader = req.headers.authorization;
+  const authHeader = req.headers.authorization || req.cookies.token;
+  let token;
+
+  // Support both Authorization header and cookie
   if (authHeader && authHeader.startsWith('Bearer ')) {
-    const token = authHeader.split(' ')[1];
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-      if (err) return res.sendStatus(403);
-      req.user = user;
-      next();
-    });
-  } else {
-    res.sendStatus(401);
+    token = authHeader.split(' ')[1];
+  } else if (req.cookies && req.cookies.token) {
+    token = req.cookies.token;
   }
+
+  if (!token) {
+    return res.status(401).json({ isAuthenticated: false, error: 'No token provided' });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET || JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ isAuthenticated: false, error: 'Invalid token' });
+    }
+    req.user = user;
+    next();
+  });
 }
 
-// Example: Protect a route
+// Add check-auth route
 router.get('/check-auth', authenticateJWT, (req, res) => {
-  res.json({ isAuthenticated: true, user: req.user });
+  if (req.user) {
+    res.json({ isAuthenticated: true, user: req.user });
+  } else {
+    res.json({ isAuthenticated: false });
+  }
 });
 
 module.exports = {
