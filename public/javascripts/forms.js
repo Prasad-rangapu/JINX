@@ -68,7 +68,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     if (data.success) {
             localStorage.setItem('currentUser',JSON.stringify(data.user));
 
-      window.location.href = `public/home.html`;
+      window.location.href = `/public/home.html`;
     } else {
       alert('Login failed: ' + (data.error || 'Invalid credentials'));
     }
