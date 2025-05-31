@@ -116,7 +116,7 @@ router.post('/login', authLimiter, async (req, res) => {
     const { password: _, ...userData } = user;
 
     // Create JWT token
-    const token = jwt.sign({ id: userData.id, username: userData.username }, JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ id: userData.id, username: userData.username }, JWT_SECRET, { expiresIn: '10h' });
 
     res.json({ success: true, user: userData, token });
   } catch (error) {
