@@ -32,7 +32,7 @@ document.getElementById('signupForm')?.addEventListener('submit', async (e) => {
     if (data.success) {
       localStorage.setItem('currentUser', JSON.stringify(data.user));
       localStorage.setItem('token', data.token); // <-- Store JWT
-      window.location.href = `/public/home.html`;
+      window.location.href = `/home.html`;
     } else {
       alert('Signup failed: ' + (data.error || 'Unknown error'));
     }
@@ -68,7 +68,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     if (data.success) {
             localStorage.setItem('currentUser',JSON.stringify(data.user));
 
-      window.location.href = `/public/home.html`;
+      window.location.href = `/home.html`;
     } else {
       alert('Login failed: ' + (data.error || 'Invalid credentials'));
     }
@@ -110,7 +110,7 @@ document.getElementById('contactForm')?.addEventListener('submit', async (e) => 
     console.log('Response data:', data);
     if (data.success) {
       alert('Message sent successfully!');
-      window.location.href = `/public/home.html`;
+      window.location.href = `/home.html`;
     } else {
       alert('Message failed: ' + (data.error || 'Unknown error'));
     }
