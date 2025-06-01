@@ -10,7 +10,7 @@ catch(error)
 {
     document.getElementById('user-details').innerHTML=`<p>unable to load the profile please load </p>`;
     alert('unable to load profile \n please re-login' )
-    window.location.href='/Blog/public/login.html';
+    window.location.href='/login.html';
     console.error('unable to load profile:',error)
 }
 }
