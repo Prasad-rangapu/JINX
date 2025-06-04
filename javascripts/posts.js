@@ -4,7 +4,7 @@ async function addLike(postId)
   if(!currentUser)
   {
     alert("Please login to like post");
-    window.location.href=`../login.html`;
+    window.location.href=`login.html`;
     return;
   }
  try{

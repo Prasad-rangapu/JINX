@@ -15,9 +15,8 @@ const app = express();
 // Middleware
 app.use(logger('dev'));
 app.use(cors({
-  origin: ['https://jinx-backend.onrender.com'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  origin: 'https://prasad-rangapu.github.io',
+  credentials: true, // if you use cookies/auth
 }));
 
 app.use(express.json());
