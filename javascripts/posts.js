@@ -72,7 +72,7 @@ function renderPosts(posts, containerId) {
           <span id="likes-count-${post.id}" class="likes-count">${post.likes}</span>
         </div>
         <div>
-          <span>By <strong style="color:black">${post.username || 'Anonymous'}</strong></span>
+          <span  style="color:black;">By <strong>${post.username || 'Anonymous'}</strong></span>
           <span style="margin-left:8px;color:#64748b;">${new Date(post.created_at).toLocaleDateString()}</span>
         </div>
       </div>
