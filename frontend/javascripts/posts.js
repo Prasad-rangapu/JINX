@@ -12,7 +12,7 @@ async function addLike(postId)
 userId=currentUser.id;
 const token = localStorage.getItem('token');
 
- const response = await fetch(`http://localhost:3000/api/posts/${postId}/like`, {
+ const response = await fetch(`https://jinx-backend.onrender.com/api/posts/${postId}/like`, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
@@ -86,13 +86,13 @@ document.getElementById('welcome-user').innerText=`Welcome ${currentUser.usernam
 
 
 async function loadRecentPosts() {
-  const res = await fetch('http://localhost:3000/api/posts/recent');
+  const res = await fetch('https://jinx-backend.onrender.com/api/posts/recent');
   const posts = await res.json();
   renderPosts(posts, 'recent-posts');
 }
 
 async function loadRandomPosts() {
-  const res = await fetch('http://localhost:3000/api/posts/random');
+  const res = await fetch('https://jinx-backend.onrender.com/api/posts/random');
   const posts = await res.json();
   renderPosts(posts, 'blog-results');
 }
@@ -100,7 +100,7 @@ async function loadRandomPosts() {
 async function searchPosts() {
   const query = document.getElementById('blog-search').value.trim();
   if (!query) return;
-  const res = await fetch(`http://localhost:3000/api/posts/search?q=${encodeURIComponent(query)}`);
+  const res = await fetch(`https://jinx-backend.onrender.com/api/posts/search?q=${encodeURIComponent(query)}`);
   const posts = await res.json();
   renderPosts(posts, 'blog-results');
 }
@@ -109,7 +109,7 @@ async function loadUserPosts() {
   const currentUser=JSON.parse(localStorage.getItem('currentUser'));
 const id=currentUser.id;
 
-  const res = await fetch(`http://localhost:3000/api/posts/${id}`);
+  const res = await fetch(`https://jinx-backend.onrender.com/api/posts/${id}`);
   const posts = await res.json();
   const container = document.getElementById('user-posts');
   container.innerHTML = posts.map(post => `
@@ -139,7 +139,7 @@ async function submitPost(event) {
   }
   const id = currentUser.id;
 
-  const res = await fetch('http://localhost:3000/api/posts', {
+  const res = await fetch('https://jinx-backend.onrender.com/api/posts', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id, title, description }),

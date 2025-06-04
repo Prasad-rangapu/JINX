@@ -19,7 +19,7 @@ document.getElementById('signupForm')?.addEventListener('submit', async (e) => {
 
   try {
   
-    const response = await fetch('http://localhost:3000/api/auth/signup', {
+    const response = await fetch('https://jinx-backend.onrender.com/api/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -54,7 +54,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
   };
 
   try {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    const response = await fetch('https://jinx-backend.onrender.com/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include', // <-- Add this if you use sessions/cookies
@@ -68,7 +68,7 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     if (data.success) {
             localStorage.setItem('currentUser',JSON.stringify(data.user));
 
-      window.location.href = `/home.html`;
+      window.location.href = `/frontend/home.html`;
     } else {
       alert('Login failed: ' + (data.error || 'Invalid credentials'));
     }
@@ -99,7 +99,7 @@ document.getElementById('contactForm')?.addEventListener('submit', async (e) => 
 
   try {
   
-    const response = await fetch('http://localhost:3000/api/contact', {
+    const response = await fetch('https://jinx-backend.onrender.com/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -110,7 +110,7 @@ document.getElementById('contactForm')?.addEventListener('submit', async (e) => 
     console.log('Response data:', data);
     if (data.success) {
       alert('Message sent successfully!');
-      window.location.href = `/home.html`;
+      window.location.href = `../home.html`;
     } else {
       alert('Message failed: ' + (data.error || 'Unknown error'));
     }

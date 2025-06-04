@@ -6,8 +6,7 @@ const connection = mysql.createConnection({
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
-  port: process.env.MYSQL_PORT,
-  ssl: { rejectUnauthorized: false } // <-- Add this line
-}).promise(); // <-- Add .promise() here
+  port: process.env.MYSQL_PORT
+}).promise();
 
 module.exports = connection;
