@@ -24,12 +24,77 @@
     </nav>
   </header>
 
-  <section id="wish">
-    <h1 id="welcome-user"></h1>
+  <!-- Hero Section -->
+  <section class="hero-section" style="text-align:center; padding: 3.5rem 1rem 2rem 1rem;">
+    <h1 class="hero-title" style="font-size:2.5rem; font-weight:800; background:var(--gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+      Welcome to JINX Blog!
+    </h1>
+    <p style="font-size:1.25rem; color:#e0e7ff; margin:1rem 0 1.5rem 0;">
+      Discover, share, and connect with stories that inspire.<br>
+      <span style="color:var(--accent); font-weight:600;">Write your own, or explore the best from our community.</span>
+    </p>
+    <a href="create.html" class="cta-btn" style="background:var(--gradient); color:#fff; padding:0.9rem 2.2rem; border-radius:2rem; font-size:1.1rem; font-weight:600; text-decoration:none; box-shadow:0 2px 12px #5f72ff33; transition:background 0.2s,transform 0.2s;">
+      Start Writing
+    </a>
+    <div style="margin-top:2.5rem;">
+      <span style="font-size:1.1rem; color:#fff9; font-style:italic;">
+        “The best stories are yet to be written. Make yours today.”
+      </span>
+    </div>
+    <div class="scroll-down" style="margin-top:2.5rem;">
+      <svg width="32" height="32" fill="none" stroke="#fff" stroke-width="2" style="animation:bounce 1.5s infinite;">
+        <path d="M16 8v16M8 20l8 8 8-8"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Trending/Popular Posts Suggestion -->
+  <section class="suggested-section" style="max-width:1100px; margin:0 auto 2rem auto; padding:1.5rem 1rem 0 1rem;">
+    <h2 style="font-size:1.4rem; color:var(--primary); margin-bottom:1rem; font-weight:700;">Trending Now</h2>
+    <div id="trending-posts" style="display:flex; gap:1.2rem; flex-wrap:wrap;">
+      <!-- Trending posts will be loaded here by JS -->
+    </div>
   </section>
 
   <main class="posts-container" id="recent-posts"></main>
 
   <script src="javascripts/posts.js"></script>
+  <script>
+    // Example: Load trending posts (replace with your own logic if needed)
+    function loadTrendingPosts() {
+      const trending = [
+        { title: "How to Stay Productive as a Blogger", link: "blogs.html#1" },
+        { title: "10 Inspiring Stories from Our Community", link: "blogs.html#2" },
+        { title: "Tips for Writing Viral Posts", link: "blogs.html#3" }
+      ];
+      const container = document.getElementById('trending-posts');
+      trending.forEach(post => {
+        const a = document.createElement('a');
+        a.href = post.link;
+        a.textContent = post.title;
+        a.className = "nav-link";
+        a.style = "background:rgba(255,255,255,0.13);padding:0.7rem 1.5rem;border-radius:1.2rem;color:#fff;font-weight:500;text-decoration:none;box-shadow:0 2px 8px #5f72ff22;transition:background 0.2s;";
+        a.onmouseover = () => a.style.background = "var(--gradient)";
+        a.onmouseout = () => a.style.background = "rgba(255,255,255,0.13)";
+        container.appendChild(a);
+      });
+    }
+    window.onload = () => {
+      loadRecentPosts();
+      loadTrendingPosts();
+    };
+  </script>
+  <style>
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0);}
+      50% { transform: translateY(10px);}
+    }
+    .cta-btn:hover { background:linear-gradient(120deg,#9f5fff 0%,#5f72ff 100%); transform:scale(1.05);}
+    @media (max-width:700px) {
+      .hero-title { font-size:1.5rem !important;}
+      .suggested-section { padding:0.5rem 0.2rem;}
+      #trending-posts { flex-direction:column; gap:0.7rem;}
+    }
+  </style>
 </body>
 </html>
