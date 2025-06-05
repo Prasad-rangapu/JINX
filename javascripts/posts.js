@@ -137,14 +137,15 @@ async function submitPost(event) {
     window.location.href = 'login.html';
     return;
   }
-
+  const token = localStorage.getItem('token'); // <-- Add this line
 
   const res = await fetch('https://jinx-backend.onrender.com/api/posts', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json',
+    headers: { 
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
-     },
-    body: JSON.stringify({title, description }),
+    },
+    body: JSON.stringify({ title, description }),
   });
 
   if (res.ok) {

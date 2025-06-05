@@ -85,4 +85,35 @@ router.post(`/:postId/like`, async (req, res) => {
   } 
 });
 
+async function submitPost(event) {
+  event.preventDefault();
+  const title = document.getElementById('post-title').value;
+  const description = document.getElementById('post-desc').value;
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (!currentUser) {
+    alert('Please login to publish a post');
+    window.location.href = 'login.html';
+    return;
+  }
+  const token = localStorage.getItem('token'); // <-- Add this line
+
+  const res = await fetch('https://jinx-backend.onrender.com/api/posts', {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({ title, description }),
+  });
+
+  if (res.ok) {
+    alert('Post published!');
+    document.querySelector('.post-form').reset();
+    loadUserPosts();
+  } else {
+    const error = await res.json();
+    alert(`Error: ${error.message}`);
+  }
+}
+
 module.exports = router;

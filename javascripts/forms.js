@@ -66,8 +66,8 @@ document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
     console.log('Response data:', data);
 
     if (data.success) {
-            localStorage.setItem('currentUser',JSON.stringify(data.user));
-
+      localStorage.setItem('currentUser', JSON.stringify(data.user));
+      localStorage.setItem('token', data.token); // <-- Store JWT token
       window.location.href = `home.html`;
     } else {
       alert('Login failed: ' + (data.error || 'Invalid credentials'));
