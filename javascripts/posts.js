@@ -40,7 +40,7 @@ if(response.ok)
 else if(response.status===401)
 {
   alert("Please login to like post");
-  window.location.href=`../login.html`;}
+  window.location.href=`login.html`;}
 
 
  }catch(error)
