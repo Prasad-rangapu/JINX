@@ -34,6 +34,8 @@ app.use(session({
   }
 }));
 
+app.set('trust proxy', 1);
+
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
