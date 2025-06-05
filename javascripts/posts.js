@@ -40,7 +40,7 @@ if(response.ok)
 else if(response.status===401)
 {
   alert("Please login to like post");
-  window.location.href=`../login.html`;}
+  window.location.href=`login.html`;}
 
 
  }catch(error)
@@ -134,7 +134,7 @@ async function submitPost(event) {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   if (!currentUser) {
     alert('Please login to publish a post');
-    window.location.href = '../login.html';
+    window.location.href = 'login.html';
     return;
   }
   const id = currentUser.id;
