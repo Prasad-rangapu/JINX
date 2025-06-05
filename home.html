@@ -48,42 +48,9 @@
     </div>
   </section>
 
-  <!-- Trending/Popular Posts Suggestion -->
-  <section class="suggested-section" style="max-width:1100px; margin:0 auto 2rem auto; padding:1.5rem 1rem 0 1rem;">
-    <h2 style="font-size:1.4rem; color:var(--primary); margin-bottom:1rem; font-weight:700;">Trending Now</h2>
-    <div id="trending-posts" style="display:flex; gap:1.2rem; flex-wrap:wrap;">
-      <!-- Trending posts will be loaded here by JS -->
-    </div>
-  </section>
-
   <main class="posts-container" id="recent-posts"></main>
 
   <script src="javascripts/posts.js"></script>
-  <script>
-    // Example: Load trending posts (replace with your own logic if needed)
-    function loadTrendingPosts() {
-      const trending = [
-        { title: "How to Stay Productive as a Blogger", link: "blogs.html#1" },
-        { title: "10 Inspiring Stories from Our Community", link: "blogs.html#2" },
-        { title: "Tips for Writing Viral Posts", link: "blogs.html#3" }
-      ];
-      const container = document.getElementById('trending-posts');
-      trending.forEach(post => {
-        const a = document.createElement('a');
-        a.href = post.link;
-        a.textContent = post.title;
-        a.className = "nav-link";
-        a.style = "background:rgba(255,255,255,0.13);padding:0.7rem 1.5rem;border-radius:1.2rem;color:#fff;font-weight:500;text-decoration:none;box-shadow:0 2px 8px #5f72ff22;transition:background 0.2s;";
-        a.onmouseover = () => a.style.background = "var(--gradient)";
-        a.onmouseout = () => a.style.background = "rgba(255,255,255,0.13)";
-        container.appendChild(a);
-      });
-    }
-    window.onload = () => {
-      loadRecentPosts();
-      loadTrendingPosts();
-    };
-  </script>
   <style>
     @keyframes bounce {
       0%, 100% { transform: translateY(0);}
@@ -92,8 +59,6 @@
     .cta-btn:hover { background:linear-gradient(120deg,#9f5fff 0%,#5f72ff 100%); transform:scale(1.05);}
     @media (max-width:700px) {
       .hero-title { font-size:1.5rem !important;}
-      .suggested-section { padding:0.5rem 0.2rem;}
-      #trending-posts { flex-direction:column; gap:0.7rem;}
     }
   </style>
 </body>
