@@ -55,7 +55,6 @@ else if(response.status===401)
 
 
 
-
 function renderPosts(posts, containerId) {
   const container = document.getElementById(containerId);
   if (!posts.length) {
@@ -114,6 +113,7 @@ const id=currentUser.id;
   const container = document.getElementById('user-posts');
   container.innerHTML = posts.map(post => `
   <div class="post">
+    <button class="edit-btn" onclick='showForm(${JSON.stringify({ id: post.id, title: post.title, content: post.content })})' style="float:right; color:blue;">Edit</button>
     <h3>${post.title}</h3>
     <p>${post.content}</p>
     <small style="float:right; color:black;">Likes ${post.likes}</small>
@@ -122,11 +122,26 @@ const id=currentUser.id;
 `).join('');
 }
 
-function showForm() {
+function showForm(post = null) {
   const form = document.querySelector('.post-form');
-  form.style.display = form.style.display === 'none' ? 'block' : 'none';
-}
+  form.style.display = 'block';
 
+  const titleInput = document.getElementById('post-title');
+  const descInput = document.getElementById('post-desc');
+
+  if (post) {
+    // Editing: fill inputs with post values
+    titleInput.value = post.title || '';
+    descInput.value = post.content || '';
+    form.setAttribute('data-edit-id', post.id); // Optionally track which post is being edited
+  } else {
+    // Creating new: clear inputs
+    titleInput.value = '';
+    descInput.value = '';
+    form.removeAttribute('data-edit-id');
+  }
+}
+  
 // Helper to check for HTML/script tags
 function checkInput(input) {
   const tagPattern = /<[^>]*>/g;

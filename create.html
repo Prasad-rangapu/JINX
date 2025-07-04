@@ -40,7 +40,9 @@
       </form>
     </section>
 
-    <section class="posts-container" id="user-posts"></section>
+    <section class="posts-container" id="user-posts">
+      <button class="edit-btn" onclick="showForm({ id: ${post.id}, title: \`${post.title.replace(/`/g, '\\`')}\`, content: \`${post.content.replace(/`/g, '\\`')}\` })" style="float:right; color:blue;">Edit</button>
+    </section>
   </main>
 
   <script src="javascripts/posts.js"></script>
