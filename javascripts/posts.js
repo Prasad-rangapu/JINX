@@ -52,6 +52,7 @@ else if(response.status===401)
 
 }
 
+  
 
 
 
@@ -113,7 +114,7 @@ const id=currentUser.id;
   const container = document.getElementById('user-posts');
   container.innerHTML = posts.map(post => `
   <div class="post">
-    <button class="edit-btn" onclick='showForm(${JSON.stringify({ id: post.id, title: post.title, content: post.content })})' style="float:right; color:blue;">Edit</button>
+    <button class="edit-btn" onclick='showEditForm(${JSON.stringify({ id: post.id, title: post.title, content: post.content })})' style="float:right; color:blue;">Edit</button>
     <h3>${post.title}</h3>
     <p>${post.content}</p>
     <small style="float:right; color:black;">Likes ${post.likes}</small>
@@ -122,26 +123,11 @@ const id=currentUser.id;
 `).join('');
 }
 
-function showForm(post = null) {
+function showForm() {
   const form = document.querySelector('.post-form');
   form.style.display = 'block';
-
-  const titleInput = document.getElementById('post-title');
-  const descInput = document.getElementById('post-desc');
-
-  if (post) {
-    // Editing: fill inputs with post values
-    titleInput.value = post.title || '';
-    descInput.value = post.content || '';
-    form.setAttribute('data-edit-id', post.id); // Optionally track which post is being edited
-  } else {
-    // Creating new: clear inputs
-    titleInput.value = '';
-    descInput.value = '';
-    form.removeAttribute('data-edit-id');
-  }
 }
-  
+
 // Helper to check for HTML/script tags
 function checkInput(input) {
   const tagPattern = /<[^>]*>/g;
@@ -154,6 +140,91 @@ function hasInvalidInput(obj) {
     }
   }
   return null;
+}
+
+// Helper to escape HTML (for safe rendering)
+function escapeHTML(str) {
+  return String(str).replace(/[&<>"'`=\/]/g, s => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
+    "'": '&#39;', '`': '&#96;', '=': '&#61;', '/': '&#47;'
+  })[s]);
+}
+
+// Show the edit form with post data and action buttons
+function showEditForm(post) {
+  const formContainer = document.getElementById('edit-form-container');
+  formContainer.innerHTML = `
+    <form id="edit-post-form" class="post-form" style="display:block;">
+      <label for="edit-post-title"><b>Title</b></label>
+      <input type="text" id="edit-post-title" value="${escapeHTML(post.title)}" required>
+      <label for="edit-post-desc"><b>Description</b></label>
+      <textarea id="edit-post-desc" required>${escapeHTML(post.content)}</textarea>
+      <div style="margin-top:10px;">
+        <button type="submit" style="background:#22c55e;color:#fff;">Save</button>
+        <button type="button" id="delete-post-btn" style="background:#ef4444;color:#fff;">Delete</button>
+        <button type="button" id="cancel-edit-btn" style="background:#64748b;color:#fff;">Cancel</button>
+      </div>
+    </form>
+  `;
+  formContainer.style.display = 'block';
+
+  // Save (update) post
+  document.getElementById('edit-post-form').onsubmit = async function(e) {
+    e.preventDefault();
+    const title = document.getElementById('edit-post-title').value.trim();
+    const content = document.getElementById('edit-post-desc').value.trim();
+
+    // Validate for HTML/script tags
+    const invalidField = hasInvalidInput({ title, content });
+    if (invalidField) {
+      alert(`Invalid input in "${invalidField}". HTML or script tags are not allowed.`);
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+    const res = await fetch(`https://jinx-backend.onrender.com/api/posts/${post.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ title, description: content })
+    });
+
+    if (res.ok) {
+      alert('Post updated!');
+      formContainer.style.display = 'none';
+      loadUserPosts();
+    } else {
+      const error = await res.json();
+      alert(`Error: ${error.message}`);
+    }
+  };
+
+  // Delete post
+  document.getElementById('delete-post-btn').onclick = async function() {
+    if (!confirm('Are you sure you want to delete this post?')) return;
+    const token = localStorage.getItem('token');
+    const res = await fetch(`https://jinx-backend.onrender.com/api/posts/${post.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (res.ok) {
+      alert('Post deleted!');
+      formContainer.style.display = 'none';
+      loadUserPosts();
+    } else {
+      const error = await res.json();
+      alert(`Error: ${error.message}`);
+    }
+  };
+
+  // Cancel editing
+  document.getElementById('cancel-edit-btn').onclick = function() {
+    formContainer.style.display = 'none';
+  };
 }
 
 async function submitPost(event) {
