@@ -85,6 +85,40 @@ router.post(`/:postId/like`, async (req, res) => {
   } 
 });
 
+// Update a post (edit)
+router.put('/:postId', authenticateJWT, async (req, res) => {
+  const postId = req.params.postId;
+  const { title, description } = req.body;
+  const userId = req.user.id;
+
+  // Only allow the owner to edit
+  const [rows] = await db.query('SELECT * FROM posts WHERE id = ? AND user_id = ?', [postId, userId]);
+  if (!rows.length) {
+    return res.status(403).json({ error: 'Unauthorized or post not found' });
+  }
+
+  await db.query(
+    'UPDATE posts SET title = ?, content = ? WHERE id = ?',
+    [title, description, postId]
+  );
+  res.json({ message: 'Post updated' });
+});
+
+// Delete a post
+router.delete('/:postId', authenticateJWT, async (req, res) => {
+  const postId = req.params.postId;
+  const userId = req.user.id;
+
+  // Only allow the owner to delete
+  const [rows] = await db.query('SELECT * FROM posts WHERE id = ? AND user_id = ?', [postId, userId]);
+  if (!rows.length) {
+    return res.status(403).json({ error: 'Unauthorized or post not found' });
+  }
+
+  await db.query('DELETE FROM posts WHERE id = ?', [postId]);
+  res.json({ message: 'Post deleted' });
+});
+
 async function submitPost(event) {
   event.preventDefault();
   const title = document.getElementById('post-title').value;

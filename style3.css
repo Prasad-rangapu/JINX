@@ -1,23 +1,52 @@
 :root {
-  --primary: #5f72ff;
-  --secondary: #9f5fff;
+  --primary: #3b3b5b;
+  --secondary: #7c3aed;
   --accent: #f59e0b;
-  --dark: #181c2f;
-  --light: #f8fafc;
-  --gradient: linear-gradient(120deg, #5f72ff 0%, #9f5fff 100%);
+  --dark: #23272f;
+  --light: #f7f8fa;
+  --gradient: linear-gradient(120deg, #3b3b5b 0%, #7c3aed 100%);
   --glass: rgba(255, 255, 255, 0.18);
   --shadow: 0 8px 32px rgba(31, 38, 135, 0.18);
   --blur: blur(16px);
+  --font-main: 'Inter', 'Segoe UI', Arial, sans-serif;
+  --font-alt: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  --text-main: #23272f;
+  --text-light: #f7f8fa;
+  --text-muted: #7c7c8a;
 }
 
 body {
-  min-height: 100vh;
-  background: linear-gradient(120deg, #232526 0%, #5f72ff 100%);
-  background-attachment: fixed;
-  color: #f5f6fa;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  position: relative;
-  overflow-x: hidden;
+  color: var(--text-main);
+  font-family: var(--font-main);
+  background: linear-gradient(120deg, #f7f8fa 0%, #e3e6f3 100%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-alt);
+  color: var(--primary);
+}
+
+a, .nav-link {
+  color: var(--primary);
+}
+
+.posts-container, .user-posts-container, .profile-main, .user-details {
+  color: var(--text-main);
+}
+
+.profile-cards, .user-details {
+  background: #fff;
+  color: var(--text-main);
+}
+
+input, textarea {
+  color: var(--text-main);
+  font-family: var(--font-main);
+}
+
+::placeholder {
+  color: var(--text-muted);
+  font-family: var(--font-main);
 }
 
 /* Animated Gradient Overlay */
@@ -73,6 +102,7 @@ body, h1, h2, h3, p, a, button {
   font-weight: bold;
   background: var(--gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 4px 24px #5f72ff44;
 }
@@ -408,6 +438,45 @@ main {
   background: linear-gradient(120deg, #9f5fff 0%, #5f72ff 100%);
   color: #fff;
   box-shadow: 0 4px 18px #5f72ff44;
+}
+
+/* Post Edit Form Buttons */
+#edit-form-container .post-form button[type="submit"], 
+#edit-form-container #delete-post-btn, 
+#edit-form-container #cancel-edit-btn {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  margin-right: 0.7rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px #7c3aed22;
+}
+
+#edit-form-container .post-form button[type="submit"] {
+  background: var(--gradient);
+  color: #fff;
+}
+
+#edit-form-container #delete-post-btn {
+  background: #e11d48;
+  color: #fff;
+}
+
+#edit-form-container #cancel-edit-btn {
+  background: #e5e7eb;
+  color: #3b3b5b;
+}
+
+#edit-form-container .post-form button:hover,
+#edit-form-container #delete-post-btn:hover,
+#edit-form-container #cancel-edit-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.04);
 }
 
 /* Responsive Design */

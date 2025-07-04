@@ -125,7 +125,8 @@ const id=currentUser.id;
 
 function showForm() {
   const form = document.querySelector('.post-form');
-  form.style.display = 'block';
+  form.style.display =='block'?'none':'block';
+
 }
 
 // Helper to check for HTML/script tags
@@ -160,9 +161,9 @@ function showEditForm(post) {
       <label for="edit-post-desc"><b>Description</b></label>
       <textarea id="edit-post-desc" required>${escapeHTML(post.content)}</textarea>
       <div style="margin-top:10px;">
-        <button type="submit" style="background:#22c55e;color:#fff;">Save</button>
-        <button type="button" id="delete-post-btn" style="background:#ef4444;color:#fff;">Delete</button>
-        <button type="button" id="cancel-edit-btn" style="background:#64748b;color:#fff;">Cancel</button>
+        <button type="submit" style="background:var(--gradient);color:#fff;">Save</button>
+        <button type="button" id="delete-post-btn" style="background:#e11d48;color:#fff;">Delete</button>
+        <button type="button" id="cancel-edit-btn" style="background:#e5e7eb;color:#3b3b5b;">Cancel</button>
       </div>
     </form>
   `;
@@ -173,11 +174,16 @@ function showEditForm(post) {
     e.preventDefault();
     const title = document.getElementById('edit-post-title').value.trim();
     const content = document.getElementById('edit-post-desc').value.trim();
+    const saveBtn = this.querySelector('button[type="submit"]');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
 
     // Validate for HTML/script tags
     const invalidField = hasInvalidInput({ title, content });
     if (invalidField) {
       alert(`Invalid input in "${invalidField}". HTML or script tags are not allowed.`);
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save';
       return;
     }
 
@@ -190,6 +196,9 @@ function showEditForm(post) {
       },
       body: JSON.stringify({ title, description: content })
     });
+
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Save';
 
     if (res.ok) {
       alert('Post updated!');
@@ -204,6 +213,8 @@ function showEditForm(post) {
   // Delete post
   document.getElementById('delete-post-btn').onclick = async function() {
     if (!confirm('Are you sure you want to delete this post?')) return;
+    this.disabled = true;
+    this.textContent = 'Deleting...';
     const token = localStorage.getItem('token');
     const res = await fetch(`https://jinx-backend.onrender.com/api/posts/${post.id}`, {
       method: 'DELETE',
@@ -211,6 +222,8 @@ function showEditForm(post) {
         'Authorization': `Bearer ${token}`
       }
     });
+    this.disabled = false;
+    this.textContent = 'Delete';
     if (res.ok) {
       alert('Post deleted!');
       formContainer.style.display = 'none';
