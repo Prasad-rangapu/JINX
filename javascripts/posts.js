@@ -127,6 +127,20 @@ function showForm() {
   form.style.display = form.style.display === 'none' ? 'block' : 'none';
 }
 
+// Helper to check for HTML/script tags
+function checkInput(input) {
+  const tagPattern = /<[^>]*>/g;
+  return tagPattern.test(input);
+}
+function hasInvalidInput(obj) {
+  for (const key in obj) {
+    if (checkInput(obj[key])) {
+      return key;
+    }
+  }
+  return null;
+}
+
 async function submitPost(event) {
   event.preventDefault();
   const title = document.getElementById('post-title').value;
@@ -137,6 +151,14 @@ async function submitPost(event) {
     window.location.href = 'login.html';
     return;
   }
+
+  // Validate for HTML/script tags
+  const invalidField = hasInvalidInput({ title, description });
+  if (invalidField) {
+    alert(`Invalid input in "${invalidField}". HTML or script tags are not allowed.`);
+    return;
+  }
+
   const token = localStorage.getItem('token'); // <-- Add this line
 
   const res = await fetch('https://jinx-backend.onrender.com/api/posts', {
