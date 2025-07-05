@@ -153,21 +153,29 @@ function escapeHTML(str) {
 
 // Show the edit form with post data and action buttons
 function showEditForm(post) {
-  const formContainer = document.getElementById('edit-form-container');
-  formContainer.innerHTML = `
-    <form id="edit-post-form" class="post-form" style="display:block;">
-      <label for="edit-post-title"><b>Title</b></label>
-      <input type="text" id="edit-post-title" value="${escapeHTML(post.title)}" required>
-      <label for="edit-post-desc"><b>Description</b></label>
-      <textarea id="edit-post-desc" required>${escapeHTML(post.content)}</textarea>
-      <div style="margin-top:10px;">
-        <button type="submit" style="background:var(--gradient);color:#fff;">Save</button>
-        <button type="button" id="delete-post-btn" style="background:#e11d48;color:#fff;">Delete</button>
-        <button type="button" id="cancel-edit-btn" style="background:#e5e7eb;color:#3b3b5b;">Cancel</button>
-      </div>
-    </form>
+  // Remove any existing modal
+  let modal = document.getElementById('edit-form-modal');
+  if (modal) modal.remove();
+
+  // Create modal overlay
+  modal = document.createElement('div');
+  modal.id = 'edit-form-modal';
+  modal.innerHTML = `
+    <div id="edit-form-container">
+      <form id="edit-post-form" class="post-form" autocomplete="off">
+        <label for="edit-post-title"><b>Title</b></label>
+        <input type="text" id="edit-post-title" value="${escapeHTML(post.title)}" required>
+        <label for="edit-post-desc"><b>Description</b></label>
+        <textarea id="edit-post-desc" rows="5" required>${escapeHTML(post.content)}</textarea>
+        <div class="edit-actions">
+          <button type="submit">Save</button>
+          <button type="button" id="delete-post-btn">Delete</button>
+          <button type="button" id="cancel-edit-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
   `;
-  formContainer.style.display = 'block';
+  document.body.appendChild(modal);
 
   // Save (update) post
   document.getElementById('edit-post-form').onsubmit = async function(e) {
@@ -202,7 +210,7 @@ function showEditForm(post) {
 
     if (res.ok) {
       alert('Post updated!');
-      formContainer.style.display = 'none';
+      modal.remove();
       loadUserPosts();
     } else {
       const error = await res.json();
@@ -226,7 +234,7 @@ function showEditForm(post) {
     this.textContent = 'Delete';
     if (res.ok) {
       alert('Post deleted!');
-      formContainer.style.display = 'none';
+      modal.remove();
       loadUserPosts();
     } else {
       const error = await res.json();
@@ -234,9 +242,14 @@ function showEditForm(post) {
     }
   };
 
-  // Cancel editing
+  // Cancel editing (close modal)
   document.getElementById('cancel-edit-btn').onclick = function() {
-    formContainer.style.display = 'none';
+    modal.remove();
+  };
+
+  // Close modal on overlay click (optional)
+  modal.onclick = function(e) {
+    if (e.target === modal) modal.remove();
   };
 }
 

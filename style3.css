@@ -479,6 +479,94 @@ main {
   transform: scale(1.04);
 }
 
+/* Modal overlay for edit form */
+#edit-form-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44, 62, 80, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+#edit-form-container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 32px 28px 24px 28px;
+  min-width: 340px;
+  max-width: 95vw;
+  width: 400px;
+  position: relative;
+  animation: fadeIn 0.2s;
+}
+#edit-form-container label {
+  margin-top: 10px;
+  display: block;
+  font-weight: 600;
+  color: #22223b;
+}
+#edit-form-container input,
+#edit-form-container textarea {
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 14px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 1rem;
+  background: #f8fafc;
+  color: #22223b;
+  resize: vertical;
+}
+#edit-form-container .edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  justify-content: flex-end;
+}
+#edit-form-container button {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+#edit-form-container button[type="submit"] {
+  background: linear-gradient(90deg, #6366f1, #e11d48);
+  color: #fff;
+}
+#edit-form-container #delete-post-btn {
+  background: #e11d48;
+  color: #fff;
+}
+#edit-form-container #cancel-edit-btn {
+  background: #e5e7eb;
+  color: #3b3b5b;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* Style for edit button on posts */
+.edit-btn {
+  background: linear-gradient(90deg, #6366f1, #e11d48);
+  color: #fff !important;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: background 0.18s;
+}
+.edit-btn:hover {
+  background: linear-gradient(90deg, #e11d48, #6366f1);
+}
+
 /* Responsive Design */
 @media (max-width: 900px) {
   .posts-container, .user-posts-container {
