@@ -125,8 +125,11 @@ const id=currentUser.id;
 
 function showForm() {
   const form = document.querySelector('.post-form');
-  form.style.display =='block'?'none':'block';
-
+  if (form.style.display === 'block') {
+    form.style.display = 'none';
+  } else {
+    form.style.display = 'block';
+  }
 }
 
 // Helper to check for HTML/script tags
