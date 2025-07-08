@@ -55,11 +55,11 @@ async function checklogin() {
     const data = await response.json();
 
     if (data.isUserFound) { 
-        window.location.href = 'login.html';
+        window.location.href = '../login.html';
         document.getElementById("checkmail").value = ''; // Clear the input field after redirection
         document.getElementById("login_mail").value=email;
     } else {
-        window.location.href = 'sign_up.html';
+        window.location.href = '../sign_up.html';
     }
 
   } catch (error) {
