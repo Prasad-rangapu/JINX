@@ -53,11 +53,11 @@ async function checklogin() {
     const data = await response.json();
 
     if (data.isUserFound) { 
-        window.location.href = 'JINX/login.html';
+        window.location.href = 'login.html';
         document.getElementById("checkmail").value = ''; 
         document.getElementById("login_mail").value=email;
     } else {
-        window.location.href = 'JINX/sign_up.html';
+        window.location.href = 'sign_up.html';
     }
 
   } catch (error) {
