@@ -54,8 +54,9 @@ async function checklogin() {
 
     if (data.isUserFound) { 
         window.location.href = 'login.html';
-        document.getElementById("checkmail").value = ''; 
+      
         document.getElementById("login_mail").value=email;
+      
     } else {
         window.location.href = 'sign_up.html';
     }
