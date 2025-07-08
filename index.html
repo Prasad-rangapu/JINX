@@ -8,16 +8,16 @@
   <link rel="stylesheet" href="style1.css">
   <link rel="stylesheet" href="style2.css">
   <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        const response = await fetch('/api/auth/check-auth', { credentials: 'include' });
-        if (!response.ok) return;
-        const data = await response.json();
-        if (data.isAuthenticated) window.location.href = `/${data.user.username}/home`;
-      } catch (error) {
-        console.error('Auth check:', error);
-      }
-    });
+    // document.addEventListener('DOMContentLoaded', async () => {
+    //   try {
+    //     const response = await fetch('https://jinx-backend.onrender.com/api/auth/check-auth', { credentials: 'include' });
+    //     if (!response.ok) return;
+    //     const data = await response.json();
+    //     if (data.isAuthenticated) window.location.href = `/${data.user.username}/home`;
+    //   } catch (error) {
+    //     console.error('Auth check:', error);
+    //   }
+    // });
 
     // Redirect to home if already logged in
     const user = localStorage.getItem('currentUser');
@@ -99,7 +99,7 @@
       <a href="#" class="accent-link">Privacy Policy</a>
     </div>
   </footer>
-  <script src="javascripts/forms.js"></script>
+  <!-- <script src="javascripts/forms.js"></script> -->
   <script src="javascripts/animation.js"></script>
 </body>
 </html>
