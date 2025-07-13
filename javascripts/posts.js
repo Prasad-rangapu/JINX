@@ -224,13 +224,16 @@ function showEditForm(post) {
   // Delete post
   document.getElementById('delete-post-btn').onclick = async function() {
     const confirmDelete = document.getElementById('delete-confirmation');
-    confirmDelete.style.display = 'flex';
+    modal.remove(); // Remove modal to show confirmation dialog
+
+    confirmDelete.style.display = 'block';
     document.getElementById('confirm-delete').onclick = async function() {
       await deletePost(post);
       confirmDelete.style.display = 'none';
     };
     document.getElementById('cancel-delete').onclick = function() {
       confirmDelete.style.display = 'none';
+      
     };
   };              
    async function deletePost(post) {
@@ -249,11 +252,11 @@ function showEditForm(post) {
       loadUserPosts();
 const notification=document.getElementById("notification-bar");
 
-notification.innerHTML=`<p style> post deleted </p>`
+notification.innerHTML=`<p style> post deleted </p>`;
 notification.style.display='block';
 setTimeout(()=>{
 notification.style.display='none';
-},2000)
+},10000);
 
       
     } else {
