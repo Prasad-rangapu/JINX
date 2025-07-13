@@ -25,6 +25,9 @@
   </header>
 
   <main>
+    <div id="notification-bar" style="display: none;">
+
+    </div>
     <section class="new-post">
       <button id="toggle-btn" onclick="showForm()">New Post</button>
       <form class="post-form" style="display:none;" onsubmit="submitPost(event)">
@@ -44,6 +47,14 @@
       
     </section>
     <div id="edit-form-container" style="display:none;"></div>
+    <div id="delete-confirmation" style="display:none;">
+      <div>
+        <p>Are you sure you want to delete this post?</p>
+      <button id="confirm-delete">Yes</button>
+      <button id="cancel-delete">No</button>
+      </div>
+    </div>
+    
   </main>
 
   <script src="javascripts/posts.js"></script>

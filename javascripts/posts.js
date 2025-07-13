@@ -223,22 +223,39 @@ function showEditForm(post) {
 
   // Delete post
   document.getElementById('delete-post-btn').onclick = async function() {
-    if (!confirm('Are you sure you want to delete this post?')) return;
-    this.disabled = true;
-    this.textContent = 'Deleting...';
-    const token = localStorage.getItem('token');
+    const confirmDelete = document.getElementById('delete-confirmation');
+    confirmDelete.style.display = 'flex';
+    document.getElementById('confirm-delete').onclick = async function() {
+      await deletePost(post);
+      confirmDelete.style.display = 'none';
+    };
+    document.getElementById('cancel-delete').onclick = function() {
+      confirmDelete.style.display = 'none';
+    };
+  };              
+   async function deletePost(post) {
+    // Show confirmation dialog
+  
+   
+ const token = localStorage.getItem('token');
     const res = await fetch(`https://jinx-backend.onrender.com/api/posts/${post.id}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`
       }
     });
-    this.disabled = false;
-    this.textContent = 'Delete';
     if (res.ok) {
-      alert('Post deleted!');
       modal.remove();
       loadUserPosts();
+const notification=document.getElementById("notification-bar");
+
+notification.innerHTML=`<p style> post deleted </p>`
+notification.style.display='block';
+setTimeout(()=>{
+notification.style.display='none';
+},2000)
+
+      
     } else {
       const error = await res.json();
       alert(`Error: ${error.message}`);
