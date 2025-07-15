@@ -250,9 +250,9 @@ function showEditForm(post) {
     if (res.ok) {
       modal.remove();
       loadUserPosts();
-const notification=document.getElementById("notification-bar");
+const notification=document.getElementById("toast");
 
-notification.innerHTML=`<p style> post deleted </p>`;
+notification.innerHTML=`<p> post deleted </p>`;
 notification.style.display='block';
 setTimeout(()=>{
 notification.style.display='none';
