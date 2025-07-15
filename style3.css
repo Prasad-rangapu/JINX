@@ -617,28 +617,30 @@ position: fixed;
   text-align: center;
  padding:10px;
 background-color:green;
-}#delete-confirmation {
+}
+#delete-confirmation {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10001; 
-}
+  z-index: 10001;
+  backdrop-filter: blur(4px); }
 
 #delete-modal {
-  align-self: center;
   background: #fff;
   color: black;
   padding: 30px 40px;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  max-width: 400px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  max-width: 400px; 
+  width: 90%;
   text-align: center;
+  z-index: 10002;
 }
 
 #confirm-delete, #cancel-delete {
