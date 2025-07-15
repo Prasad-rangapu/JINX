@@ -307,10 +307,11 @@ async function submitPost(event) {
 
   if (res.ok) {
     alert('Post published!');
+      document.querySelector('.post-form').reset();
   document.querySelector('.post-form').style.display='none';
 
     
-    document.querySelector('.post-form').reset();
+  
     loadUserPosts();
   } else {
     const error = await res.json();
