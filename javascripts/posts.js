@@ -53,6 +53,67 @@ else if(response.status===401)
 }
 
   
+let toastTimeout;
+
+function notification(message, type = "success") {
+  let toast = document.getElementById("toast");
+
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    document.body.appendChild(toast);
+
+    // Add base styles
+    const style = document.createElement("style");
+    style.innerHTML = `
+      #toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        color: white;
+        z-index: 10000;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      .toast-success { background-color: #28a745; }
+      .toast-error { background-color: #dc3545; }
+      .toast-info { background-color: #17a2b8; }
+      .toast-warning { background-color: #ffc107; color: black; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  toast.className = "toast-" + type;
+
+  toast.innerHTML = `${getIcon(type)} ${message}`;
+  toast.style.display = "block";
+  toast.style.opacity = "1";
+
+  clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(() => {
+    toast.style.opacity = "0";
+    setTimeout(() => {
+      toast.style.display = "none";
+    }, 300);
+  }, 5000);
+}
+
+function getIcon(type) {
+  switch (type) {
+    case "success": return "✅";
+    case "error": return "❌";
+    case "info": return "ℹ️";
+    case "warning": return "⚠️";
+    default: return "";
+  }
+}
 
 
 
@@ -88,12 +149,20 @@ document.getElementById('welcome-user').innerText=`Welcome ${currentUser.usernam
 async function loadRecentPosts() {
   const res = await fetch('https://jinx-backend.onrender.com/api/posts/recent');
   const posts = await res.json();
+  if (!posts || posts.length === 0) {
+    document.getElementById('recent-posts').innerHTML = `<div style="text-align:center;color:#888;">No recent posts found.</div>`;
+    return;
+  }
   renderPosts(posts, 'recent-posts');
 }
 
 async function loadRandomPosts() {
   const res = await fetch('https://jinx-backend.onrender.com/api/posts/random');
   const posts = await res.json();
+  if (!posts || posts.length === 0) {
+    document.getElementById('random-posts').innerHTML = `<div style="text-align:center;color:#888;">No random posts found.</div>`;
+    return;
+  }
   renderPosts(posts, 'blog-results');
 }
 
@@ -102,6 +171,10 @@ async function searchPosts() {
   if (!query) return;
   const res = await fetch(`https://jinx-backend.onrender.com/api/posts/search?q=${encodeURIComponent(query)}`);
   const posts = await res.json();
+  if (!posts || posts.length === 0) {
+    document.getElementById('blog-results').innerHTML = `<div style="text-align:center;color:#888;">No posts found for "${query}".</div>`;
+    return;
+  }
   renderPosts(posts, 'blog-results');
 }
 
@@ -111,6 +184,13 @@ const id=currentUser.id;
 
   const res = await fetch(`https://jinx-backend.onrender.com/api/posts/${id}`);
   const posts = await res.json();
+  if (!posts || posts.length === 0) {
+    const container = document.getElementById('user-posts');
+    container.innerHTML = `<div style="text-align:center;color:#888;">No posts found for this user.</div>`;
+    return;
+  }
+             
+
   const container = document.getElementById('user-posts');
   container.innerHTML = posts.map(post => `
   <div class="post">
@@ -212,12 +292,13 @@ function showEditForm(post) {
     saveBtn.textContent = 'Save';
 
     if (res.ok) {
-      alert('Post updated!');
+     notification('Post updated successfully', 'success');
       modal.remove();
       loadUserPosts();
     } else {
       const error = await res.json();
-      alert(`Error: ${error.message}`);
+      
+notification("Unable to update the post","error");
     }
   };
 
@@ -250,18 +331,10 @@ function showEditForm(post) {
     if (res.ok) {
       modal.remove();
       loadUserPosts();
-const notification=document.getElementById("toast");
-
-notification.innerHTML=`<p> post deleted </p>`;
-notification.style.display='block';
-setTimeout(()=>{
-notification.style.display='none';
-},10000);
-
-      
+      notification("Post deleted successfully", "success");
     } else {
       const error = await res.json();
-      alert(`Error: ${error.message}`);
+     notification("Unable to delete the post", "error");
     }
   };
 
@@ -306,7 +379,8 @@ async function submitPost(event) {
   });
 
   if (res.ok) {
-    alert('Post published!');
+   
+   notification('Post published successfully', 'success');
       document.querySelector('.post-form').reset();
   document.querySelector('.post-form').style.display='none';
 
@@ -315,7 +389,7 @@ async function submitPost(event) {
     loadUserPosts();
   } else {
     const error = await res.json();
-    alert(`Error: ${error.message}`);
+    notification("Unable to publish post",'error');
   }
 }
 

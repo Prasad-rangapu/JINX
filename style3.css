@@ -603,21 +603,38 @@ main {
     font-size: 2rem;
   }
 }
-#toast{
-  display: none;
-  width:100vw;
-  color:whitesmoke;
-  font-size:1.2rem;
- margin:0 auto;
-  bottom:0;
-  left:0;
- z-index: 10000;
 
-position: fixed;
-  text-align: center;
- padding:10px;
-background-color:green;
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  color: white;
+  z-index: 10000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
+
+.toast-success {
+  background-color: #28a745; /* green */
+}
+.toast-error {
+  background-color: #dc3545; /* red */
+}
+.toast-info {
+  background-color: #17a2b8; /* blue */
+}
+.toast-warning {
+  background-color: #ffc107; /* yellow */
+  color: black;
+}
+
+
 #delete-confirmation {
   position: fixed;
   top: 0;
