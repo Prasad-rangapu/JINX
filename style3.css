@@ -619,7 +619,8 @@ position: fixed;
 background-color:green;
 }#delete-confirmation {
   position: fixed;
-
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0,0,0,0.4);
