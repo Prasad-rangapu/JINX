@@ -24,13 +24,14 @@ const token = localStorage.getItem('token');
 
 if(response.ok)
 {
-  const post = await response.json();
+  const {post,isliked} = await response.json();
   const likesCountElement = document.querySelector(`#likes-count-${postId}`);
   const likeBtnElement = document.querySelector(`#like-btn-${postId}`);
-  // if(likeBtnElement)
-  // {
-  //   likeBtnElement.style.display="none";
-  // }
+ if(!isliked)
+  {
+  likeBtnElement.style.color="white";
+   }
+  
   if(likesCountElement)
   {
     likesCountElement.innerText=post.likes;
