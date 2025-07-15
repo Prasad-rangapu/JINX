@@ -619,8 +619,7 @@ background-color:green;
 #delete-confirmation {
 align-items: centre;
 justify-content: center;
-top:0;
-left:0;
+
 position: fixed;
 display: flex;
 background-color: rgba(0,0,0,0.5);
