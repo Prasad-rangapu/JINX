@@ -24,7 +24,7 @@ const token = localStorage.getItem('token');
 
 if(response.ok)
 {
-  const {post} = await response.json();
+  const post= await response.json();
   const likesCountElement = document.querySelector(`#likes-count-${postId}`);
 
   
