@@ -226,7 +226,7 @@ function showEditForm(post) {
     const confirmDelete = document.getElementById('delete-confirmation');
     modal.remove(); // Remove modal to show confirmation dialog
 
-    confirmDelete.style.display = 'block';
+    confirmDelete.style.display = 'flex';
     document.getElementById('confirm-delete').onclick = async function() {
       await deletePost(post);
       confirmDelete.style.display = 'none';
@@ -307,6 +307,9 @@ async function submitPost(event) {
 
   if (res.ok) {
     alert('Post published!');
+  document.querySelector('.post-form').style.display='none';
+
+    
     document.querySelector('.post-form').reset();
     loadUserPosts();
   } else {
