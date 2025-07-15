@@ -3,7 +3,7 @@ async function addLike(postId)
   const currentUser=JSON.parse(localStorage.getItem('currentUser'));
   if(!currentUser)
   {
-    alert("Please login to like post");
+notification("Please login to like post","error");
     window.location.href=`login.html`;
     return;
   }
@@ -24,13 +24,9 @@ const token = localStorage.getItem('token');
 
 if(response.ok)
 {
-  const {post,isliked} = await response.json();
+  const {post} = await response.json();
   const likesCountElement = document.querySelector(`#likes-count-${postId}`);
-  const likeBtnElement = document.querySelector(`#like-btn-${postId}`);
- if(!isliked)
-  {
-  likeBtnElement.style.color="white";
-   }
+
   
   if(likesCountElement)
   {
@@ -40,14 +36,14 @@ if(response.ok)
 }
 else if(response.status===401)
 {
-  alert("Please login to like post");
+  notification("Please login to like post","error");
   window.location.href=`login.html`;}
 
 
  }catch(error)
  {
   console.log("Error liking post",error);
-  alert("Error liking post");
+  notification("Error liking post","error");
  }
 
 
