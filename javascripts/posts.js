@@ -366,6 +366,13 @@ async function submitPost(event) {
 
   const token = localStorage.getItem('token'); // <-- Add this line
 
+  // Ensure token exists and is valid-looking before sending
+  if (!token || token === 'null') {
+    notification('Please login to publish a post', 'error');
+    window.location.href = 'login.html';
+    return;
+  }
+
   const res = await fetch('https://jinx-backend.onrender.com/api/posts', {
     method: 'POST',
     headers: { 

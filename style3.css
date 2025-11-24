@@ -417,7 +417,7 @@ main {
   min-width: 320px;
   box-shadow: 0 2px 12px #5f72ff22;
   font-size: 1.13rem;
-  color: #fff;
+  color: black;
   backdrop-filter: var(--blur);
   border: 1.5px solid #fff2;
 }

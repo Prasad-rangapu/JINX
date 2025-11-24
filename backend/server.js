@@ -15,7 +15,7 @@ const app = express();
 // Middleware
 app.use(logger('dev'));
 app.use(cors({
-  origin: 'https://prasad-rangapu.github.io',
+  origin: ['https://prasad-rangapu.github.io','http://127.0.0.1:5500'],
   credentials: true, // if you use cookies/auth
 }));
 
