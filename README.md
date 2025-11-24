@@ -39,7 +39,7 @@ JINX is a full-stack blog web application where users can read, create, and mana
 - MariaDB (or MySQL)
 - Render (for backend deployment)
 - GitHub Pages (for frontend deployment)
-- Railway (for database deployment)
+- Aiven (for database deployment)
 
 📬 Contact:
 Prasad Rangapu  
